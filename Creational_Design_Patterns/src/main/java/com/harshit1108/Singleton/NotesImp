@@ -1,0 +1,59 @@
+readResolve
+The readResolve method is a special method in Java that is used during the deserialization process.
+When an object is deserialized, the readResolve method can be defined in the class to control what object should be returned after deserialization.
+This method is called automatically by the Java Virtual Machine (JVM) after the object is read from the stream.
+In example:
+@Serial
+protected Object readResolve() {
+    return instance;
+}
+This code indicates that the readResolve method is marked with @Serial, which is an annotation introduced in Java 14 (also known as JEP 359: Records) for specifying serialization-related methods.
+It helps the compiler to recognize and handle serialization methods correctly.
+//Here's how the readResolve method is called during the deserialization process://
+
+When an object of a class that implements Serializable is being deserialized, the ObjectInputStream checks if the class has a readResolve method.
+If the readResolve method is present and has the correct signature (protected Object readResolve()),
+it is invoked after the object is deserialized, but before it is returned to the calling code.
+The purpose of the readResolve method is to provide a substitute object that will be returned in place of the deserialized object.
+In our example, it returns the instance variable, which typically represents the singleton instance.
+This substitution helps ensure that the singleton pattern is maintained, even when an object is deserialized.
+It allows you to control what instance should be used after deserialization, potentially avoiding the creation of a new instance.
+In the context of a singleton pattern, using readResolve can help prevent the creation of additional instances during deserialization,
+ensuring that the deserialized object refers to the same singleton instance as the original object.
+This is particularly useful when dealing with singleton classes that implement Serializable.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Certainly, let's break down the provided code step by step:
+// Get all declared constructors of the LazySingleton class
+-->Constructor[] constructors = LazySingleton.class.getDeclaredConstructors();
+This line retrieves an array of all declared constructors for the LazySingleton class using reflection.
+The getDeclaredConstructors method returns an array of Constructor objects representing all the constructors declared by the class.
+
+// Knowing there is only one constructor, take it using index
+-->Constructor constructor = constructors[0];
+Assuming that there is only one constructor in the LazySingleton class, this line gets the first constructor from the array.
+
+// Set the accessibility of the constructor to true to allow instantiation
+-->constructor.setAccessible(true);
+This line sets the accessibility of the constructor to true using the setAccessible method. By default, constructors with private access are not accessible outside the class, but this line allows it to be invoked later.
+
+// Use the constructor to create an instance of LazySingleton
+-->LazySingleton lazySingleton = (LazySingleton) constructor.newInstance();
+This line uses the constructor to create a new instance of the LazySingleton class. The newInstance method is part of the Constructor class and creates a new instance of the class that the constructor belongs to.
+
+// Get a regular instance of LazySingleton using the getInstance method
+-->LazySingleton instance = LazySingleton.getInstance();
+This line gets a regular instance of LazySingleton using the getInstance method. The intention is to compare the hash codes of the reflected instance and the regular instance.
+
+// Print the hash codes of the reflected and regular instances
+System.out.println("Reflected hashcode singleton: " + lazySingleton.hashCode());
+System.out.println("Singleton instance: " + instance.hashCode());
+These lines print the hash codes of the reflected LazySingleton instance and the regular LazySingleton instance. The goal is to demonstrate that using reflection to create an instance through the constructor yields a different instance from the one obtained using the normal getInstance method.
+
+// EnumSingleton.INSTANCE.doSomething();
+This line  suggests an alternative solution to prevent reflection-based instantiation of a singleton by using an enum.
+Enums in Java provide a concise way to create singletons, as they ensure that there is only one instance of each enum constant.
+
+In summary, the code uses reflection to access and instantiate the private constructor of LazySingleton,
+and then it compares the hash codes of the reflected instance and the instance obtained through the normal getInstance method.
+The use of an enum singleton is also mentioned as a solution to avoid such reflective instantiation.
