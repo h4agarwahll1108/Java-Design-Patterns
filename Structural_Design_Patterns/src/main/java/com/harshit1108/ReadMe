@@ -1,1 +1,45 @@
-Temp
+STRUCTURAL_DESIGN_PATTERNS
+1. Adapter
+2. Bridge
+3. Composite
+4. Decorator
+5. Facade
+6. Flyweight
+7. proxy
+
+Adapter Pattern:
+Description: Converts the interface of a class into another interface clients expect.
+Advantage: Allows incompatible interfaces to work together.
+Example: Adapting a legacy class to a new interface.
+
+Bridge Pattern:
+Description: Separates abstraction from implementation, allowing both to vary independently.
+Advantage: Enhances flexibility by decoupling abstraction and implementation.
+Example: Graphic shapes with rendering variations.
+
+Composite Pattern:
+Description: Composes objects into tree structures to represent part-whole hierarchies.
+Advantage: Treats both individual objects and compositions uniformly.
+Example: Representing a document with paragraphs and text.
+
+Decorator Pattern:
+Description: Attaches additional responsibilities to an object dynamically.
+Advantage: Allows flexible and reusable object extension.
+Example: Adding scroll functionality to a window.
+
+Facade Pattern:
+Description: Provides a simplified interface to a set of interfaces in a subsystem.
+Advantage: Hides complexities and provides a unified entry point.
+Example: Simplifying interactions with a complex subsystem.
+
+Flyweight Pattern:
+Description: Minimizes memory usage by sharing as much as possible among similar objects.
+Advantage: Reduces memory overhead for a large number of similar objects.
+Example: Sharing common characters in a text editor.
+
+Proxy Pattern:
+Description: Controls access to an object by acting as a surrogate or placeholder.
+Advantage: Provides additional control over the functionality of an object.
+Example: Virtual proxy for loading images on demand.
+
+|*************************Keep Learning ***********************8|
